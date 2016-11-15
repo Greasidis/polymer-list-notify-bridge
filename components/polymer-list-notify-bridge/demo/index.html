@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+  <head>
+    <title>polymer-list-notify-bridge demo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+
+    <link rel="import" href="../polymer-list-notify-bridge.html">
+
+    <style is="custom-style" include="demo-pages-shared-styles">
+    </style>
+  </head>
+  <body>
+
+    <div class="vertical-section-container centered">
+      <h3>Basic polymer-list-notify-bridge Demo</h3>
+      <demo-snippet>
+        <template is="dom-bind" id="app">
+          <polymer-list-notify-bridge list1={{list1}} list2={{list2}}></polymer-list-notify-bridge>
+          
+          <div>
+            <b>list 1</b>
+            <ul>
+              <template is="dom-repeat" items="{{list1}}">
+                <li>
+                  <span>{{item.title}} {{item.counter}}</span>
+                  <button type="button" on-tap="increaseList1Coutner">+</button>
+                </li>
+              </template>
+            </ul>
+          </div>
+          <div>
+            <b>list 2</b>
+            <ul>
+              <template is="dom-repeat" items="{{list2}}">
+                <li>
+                  <span>{{item.title}} {{item.counter}}</span>
+                </li>
+              </template>
+            </ul>
+          </div>
+        </template>
+        <script type="text/javascript">
+          (function () {
+            var app = document.querySelector('#app');
+            app.list1 = [
+              { id: 1, title: 'item 1', counter: 0},
+              { id: 2, title: 'item 2', counter: 0},
+              { id: 3, title: 'item 3', counter: 0}
+            ];
+            app.list2 = app.list1.slice().sort(function (a, b) {
+              return Math.pow(-1, Math.ceil(Math.random() * 2));
+            });
+
+            app.increaseList1Coutner = function (e) {
+              var i = this.list1.indexOf(e.model.item);
+              if (i >= 0) {
+                this.set('list1.#' + i + '.counter', this.list1[i].counter + 1);
+              }
+            }
+          })();
+        </script>
+      </demo-snippet>
+    </div>
+
+  </body>
+</html>
