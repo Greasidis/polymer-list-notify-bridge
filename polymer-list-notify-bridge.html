@@ -67,7 +67,7 @@ A polymer element that does the appropriate notifyPath() calls when editing a sp
                 return;
             }
 
-            var targetNotifyPath = changeRecord.path.replace(regex, `${targetListName}.#$1.`);
+            var targetNotifyPath = changeRecord.path.replace(regex, `${targetListName}.#${targetListIndex}.`);
             this.notifyPath(targetNotifyPath, this.get(changeRecord.path));
         }
     });
